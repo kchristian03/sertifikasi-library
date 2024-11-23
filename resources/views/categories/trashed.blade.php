@@ -19,7 +19,7 @@
             <table class="min-w-full bg-white shadow rounded">
                 <thead>
                 <tr>
-                    <th class="py-2 px-4 border-b">UUID</th>
+{{--                    <th class="py-2 px-4 border-b">UUID</th>--}}
                     <th class="py-2 px-4 border-b">Category Name</th>
                     <th class="py-2 px-4 border-b">Delete at</th>
                     <th class="py-2 px-4 border-b">Action</th>
@@ -28,7 +28,7 @@
                 <tbody>
                 @foreach($categories as $category)
                     <tr class="text-center">
-                        <td class="py-2 px-4 border-b">{{ $category->uuid }}</td>
+{{--                        <td class="py-2 px-4 border-b">{{ $category->uuid }}</td>--}}
                         <td class="py-2 px-4 border-b">{{ $category->category_name }}</td>
                         <td class="py-2 px-4 border-b">{{ $category->deleted_at->format('d M Y, H:i') }}</td>
                         <td class="py-2 px-4 border-b">

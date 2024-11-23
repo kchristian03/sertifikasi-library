@@ -19,7 +19,7 @@
             <table class="min-w-full bg-white shadow rounded">
                 <thead>
                 <tr>
-                    <th class="py-2 px-4 border-b">UUID</th>
+{{--                    <th class="py-2 px-4 border-b">UUID</th>--}}
                     <th class="py-2 px-4 border-b">Name</th>
                     <th class="py-2 px-4 border-b">Phone</th>
                     <th class="py-2 px-4 border-b">Email</th>
@@ -31,7 +31,7 @@
                 <tbody>
                 @foreach($members as $member)
                     <tr class="text-center">
-                        <td class="py-2 px-4 border-b">{{ $member->uuid }}</td>
+{{--                        <td class="py-2 px-4 border-b">{{ $member->uuid }}</td>--}}
                         <td class="py-2 px-4 border-b">{{ $member->name }}</td>
                         <td class="py-2 px-4 border-b">{{ $member->phone }}</td>
                         <td class="py-2 px-4 border-b">{{ $member->email }}</td>

@@ -30,7 +30,7 @@ class CategoryController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'category_name' => 'required',
+            'category_name' => 'required|unique:categories',
         ]);
 
         Category::create($request->all());
@@ -46,7 +46,7 @@ class CategoryController extends Controller
         $category = Category::with('books')->where('uuid', $id)->firstOrFail();
 
         // Mengambil buku yang terkait dengan kategori tersebut, dengan pagination
-        $books = $category->books()->paginate(10);
+        $books = $category->books();
 
         return view('categories.books', compact('category', 'books'));
     }
@@ -67,7 +67,7 @@ class CategoryController extends Controller
     public function update(Request $request, string $id)
     {
         $request->validate([
-            'category_name' => 'required',
+            'category_name' => 'required|unique:categories,category_name,' . $id . ',uuid',
         ]);
 
         Category::findOrFail($id)->update($request->all());

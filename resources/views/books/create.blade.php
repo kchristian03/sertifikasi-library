@@ -30,12 +30,13 @@
             </div>
             <div class="mb-4">
                 <label for="categories" class="block text-gray-700">Category</label>
-                <select name="categories[]" id="categories" multiple class="w-full mt-1 p-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-600">
-                    @foreach($categories as $category)
-                        <option value="{{ $category->uuid }}" {{ (collect(old('categories'))->contains($category->uuid)) ? 'selected' : '' }}>{{ $category->category_name }}</option>
-                    @endforeach
-                </select>
-                <small class="text-gray-500">Hold down the Ctrl (Windows) or Command (Mac) key to select multiple categories.</small>
+                @foreach($categories as $category)
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" name="categories[]" id="category{{ $category->uuid }}" value="{{ $category->uuid }}"
+                            {{ (is_array(old('categories')) && in_array($category->uuid, old('categories'))) ? 'checked' : '' }}>
+                        <label class="form-check-label" for="category{{ $category->uuid }}">{{ $category->category_name }}</label>
+                    </div>
+                @endforeach
             </div>
             <div class="mb-4">
                 <label for="member_uuid" class="block text-gray-700">Borrowed by</label>

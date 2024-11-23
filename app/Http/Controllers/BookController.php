@@ -34,7 +34,7 @@ class BookController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'title' => 'required',
+            'title' => 'required|unique:books',
             'author' => 'required',
             'publish_year' => 'required|date_format:Y',
             'categories' => 'required|array',
@@ -65,13 +65,13 @@ class BookController extends Controller
         $book = Book::with(['category', 'member'])->where('uuid', $id)->firstOrFail();
 
         // Mengambil semua kategori untuk dropdown
-        $category = Category::all();
+        $categories = Category::all();
         $members = Member::all();
 
         // Mendapatkan UUID kategori yang terkait dengan buku
         $selectedCategories = $book->category()->pluck('uuid')->toArray();
 
-        return view('books.edit', compact('book', 'category', 'members', 'selectedCategories'));
+        return view('books.edit', compact('book', 'categories', 'members', 'selectedCategories'));
     }
 
     /**
@@ -80,7 +80,7 @@ class BookController extends Controller
     public function update(Request $request, string $id)
     {
         $request->validate([
-            'title' => 'required',
+            'title' => 'required|unique:books,title,' . $id . ',uuid',
             'author' => 'required',
             'publish_year' => 'required|date_format:Y',
             'categories' => 'required|array',

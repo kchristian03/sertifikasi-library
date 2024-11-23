@@ -32,8 +32,8 @@ class MemberController extends Controller
         $request->validate([
             'name' => 'required',
             'address' => 'required',
-            'email' => 'required|email',
-            'phone' => 'required|numeric',
+            'email' => 'required|email|unique:members,email',
+            'phone' => 'required|numeric|unique:members,phone',
         ]);
 
         Member::create($request->all());
@@ -49,7 +49,7 @@ class MemberController extends Controller
         $member = Member::with('books')->where('uuid', $id)->firstOrFail();
 
         // Mengambil buku yang dipinjam oleh anggota tersebut, dengan pagination
-        $books = $member->books()->paginate(10);
+        $books = $member->books();
 
         return view('members.books', compact('member', 'books'));
     }
@@ -72,8 +72,8 @@ class MemberController extends Controller
         $request->validate([
             'name' => 'required',
             'address' => 'required',
-            'email' => 'required|email',
-            'phone' => 'required|numeric',
+            'email' => 'required|email|unique:members,email,' . $id . ',uuid',
+            'phone' => 'required|numeric|unique:members,phone,' . $id . ',uuid',
         ]);
 
         Member::findOrFail($id)->update($request->all());
