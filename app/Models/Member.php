@@ -26,7 +26,7 @@ class Member extends Model
         });
     }
 
-    public function book(): HasMany
+    public function books(): HasMany
     {
         return $this->hasMany(Book::class, 'member_uuid');
     }

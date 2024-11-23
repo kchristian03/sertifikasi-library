@@ -25,8 +25,11 @@ class Category extends Model
         });
     }
 
-    public function book()
+    public function books()
     {
-        return $this->belongsToMany(Book::class, 'book_category', 'category_uuid', 'book_uuid')->withTimestamps()->withPivot('deleted_at')->wherePivot('deleted_at', null);
+        return $this->belongsToMany(Book::class, 'book_category', 'category_uuid', 'book_uuid')
+            ->withTimestamps()
+            ->withPivot('deleted_at')
+            ->wherePivot('deleted_at', null);
     }
 }

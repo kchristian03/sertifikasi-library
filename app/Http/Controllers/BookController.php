@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Book;
 use App\Models\Category;
+use App\Models\Member;
 use Illuminate\Http\Request;
 
 class BookController extends Controller
@@ -22,7 +23,9 @@ class BookController extends Controller
      */
     public function create()
     {
-        return view('books.create');
+        $categories = Category::all();
+        $members = Member::all();
+        return view('books.create', compact('categories', 'members'));
     }
 
     /**
@@ -32,7 +35,8 @@ class BookController extends Controller
     {
         $request->validate([
             'title' => 'required',
-            'author' => 'required|digits:4|integer',
+            'author' => 'required',
+            'publish_year' => 'required|date_format:Y',
             'categories' => 'required|array',
             'member_uuid' => 'nullable|exists:members,uuid',
         ]);
@@ -57,10 +61,17 @@ class BookController extends Controller
      */
     public function edit(string $id)
     {
-//        $categories = Category::all();
-        return view('books.edit', [
-            'book' => Book::with('category', 'member')->findOrFail($id),
-        ]);
+        // Mengambil buku berdasarkan UUID dan eager load relasi 'kategoris' dan 'anggota'
+        $book = Book::with(['category', 'member'])->where('uuid', $id)->firstOrFail();
+
+        // Mengambil semua kategori untuk dropdown
+        $category = Category::all();
+        $members = Member::all();
+
+        // Mendapatkan UUID kategori yang terkait dengan buku
+        $selectedCategories = $book->category()->pluck('uuid')->toArray();
+
+        return view('books.edit', compact('book', 'category', 'members', 'selectedCategories'));
     }
 
     /**
@@ -70,7 +81,8 @@ class BookController extends Controller
     {
         $request->validate([
             'title' => 'required',
-            'author' => 'required|digits:4|integer',
+            'author' => 'required',
+            'publish_year' => 'required|date_format:Y',
             'categories' => 'required|array',
             'member_uuid' => 'nullable|exists:members,uuid',
         ]);

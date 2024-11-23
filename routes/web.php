@@ -2,17 +2,16 @@
 
 use App\Http\Controllers\BookController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\MemberController;
 use Illuminate\Support\Facades\Route;
 
-Route::resource('categories', CategoryController::class);
-Route::resource('books', BookController::class);
-Route::resource('members', MemberController::class);
+//Route::resource('categories', CategoryController::class);
+//Route::resource('books', BookController::class);
+//Route::resource('members', MemberController::class);
 
 // Home Route
-Route::get('/', function () {
-    return view('welcome');
-})->name('home');
+Route::get('/', [DashboardController::class, 'index'])->name('home');
 
 // Resource Routes
 Route::resource('members', MemberController::class);

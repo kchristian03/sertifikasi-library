@@ -28,7 +28,10 @@ class Book extends Model
 
     public function category()
     {
-        return $this->belongsToMany(Category::class, 'book_category', 'book_uuid', 'category_uuid')->withTimestamps()->withPivot('deleted_at')->wherePivot('deleted_at', null);
+        return $this->belongsToMany(Category::class, 'book_category', 'book_uuid', 'category_uuid')
+            ->withTimestamps()
+            ->withPivot('deleted_at')
+            ->wherePivot('deleted_at', null);
     }
 
     public function member(): BelongsTo

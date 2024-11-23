@@ -14,6 +14,9 @@
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
 
+        <!-- Alpine.js untuk interaktivitas sederhana -->
+        <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+
         <!-- Styles -->
         @livewireStyles
     </head>
@@ -22,20 +25,21 @@
         <div class="container mx-auto px-6 py-3">
             <div class="flex items-center justify-between">
                 <div>
-                    <a href="{{ route('home') }}" class="text-gray-800 text-xl font-bold">Perpustakaan</a>
+                    <a href="{{ route('home') }}" class="text-gray-800 text-xl font-bold">Library</a>
                 </div>
                 <div class="flex space-x-4">
-                    <a href="{{ route('bukus.index') }}" class="text-gray-600 hover:text-gray-800">Buku</a>
-                    <a href="{{ route('kategoris.index') }}" class="text-gray-600 hover:text-gray-800">Kategori</a>
-                    <a href="{{ route('anggotas.index') }}" class="text-gray-600 hover:text-gray-800">Anggota</a>
-                    <div class="relative">
-                        <button class="text-gray-600 hover:text-gray-800 focus:outline-none">
+                    <a href="{{ route('books.index') }}" class="text-gray-600 hover:text-gray-800">Book</a>
+                    <a href="{{ route('categories.index') }}" class="text-gray-600 hover:text-gray-800">Category</a>
+                    <a href="{{ route('members.index') }}" class="text-gray-600 hover:text-gray-800">Member</a>
+                    <!-- Dropdown Trash dengan Alpine.js -->
+                    <div x-data="{ open: false }" class="relative">
+                        <button @click="open = !open" class="text-gray-600 hover:text-gray-800 focus:outline-none">
                             Trash
                         </button>
-                        <div class="absolute right-0 mt-2 w-48 bg-white border rounded-md shadow-lg hidden group-hover:block">
-                            <a href="{{ route('bukus.trashed') }}" class="block px-4 py-2 text-gray-800 hover:bg-gray-100">Buku</a>
-                            <a href="{{ route('kategoris.trashed') }}" class="block px-4 py-2 text-gray-800 hover:bg-gray-100">Kategori</a>
-                            <a href="{{ route('anggotas.trashed') }}" class="block px-4 py-2 text-gray-800 hover:bg-gray-100">Anggota</a>
+                        <div x-show="open" @click.away="open = false" class="absolute right-0 mt-2 w-48 bg-white border rounded-md shadow-lg z-10">
+                            <a href="{{ route('books.trashed') }}" class="block px-4 py-2 text-gray-800 hover:bg-gray-100">Book</a>
+                            <a href="{{ route('categories.trashed') }}" class="block px-4 py-2 text-gray-800 hover:bg-gray-100">Category</a>
+                            <a href="{{ route('members.trashed') }}" class="block px-4 py-2 text-gray-800 hover:bg-gray-100">Member</a>
                         </div>
                     </div>
                 </div>
