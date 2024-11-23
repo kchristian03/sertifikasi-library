@@ -49,7 +49,7 @@ class MemberController extends Controller
         $member = Member::with('books')->where('uuid', $id)->firstOrFail();
 
         // Mengambil buku yang dipinjam oleh anggota tersebut, dengan pagination
-        $books = $member->books();
+        $books = $member->books()->get();
 
         return view('members.books', compact('member', 'books'));
     }

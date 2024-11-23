@@ -46,7 +46,7 @@ class CategoryController extends Controller
         $category = Category::with('books')->where('uuid', $id)->firstOrFail();
 
         // Mengambil buku yang terkait dengan kategori tersebut, dengan pagination
-        $books = $category->books();
+        $books = $category->books()->get();
 
         return view('categories.books', compact('category', 'books'));
     }
