@@ -27,6 +27,7 @@
 {{--                    <td class="py-2 px-4 border-b">{{ $category->uuid }}</td>--}}
                     <td class="py-2 px-4 border-b">{{ $category->category_name }}</td>
                     <td class="py-2 px-4 border-b">
+                        <a href="{{ route('categories.show', $category->uuid) }}" class="text-blue-500 hover:underline mr-2">Detail</a>
                         <a href="{{ route('categories.edit', $category->uuid) }}" class="text-yellow-500 hover:text-yellow-700 mr-2">Edit</a>
                         <form action="{{ route('categories.destroy', $category->uuid) }}" method="POST" class="inline-block" onsubmit="return confirm('Are you sure you want to delete this category?');">
                             @csrf

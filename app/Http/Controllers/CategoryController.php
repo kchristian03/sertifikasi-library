@@ -42,9 +42,13 @@ class CategoryController extends Controller
      */
     public function show(string $id)
     {
-        return view('categories.show', [
-            'category' => Category::findOrFail($id),
-        ]);
+        // Mengambil kategori berdasarkan UUID dan eager load relasi 'books'
+        $category = Category::with('books')->where('uuid', $id)->firstOrFail();
+
+        // Mengambil buku yang terkait dengan kategori tersebut, dengan pagination
+        $books = $category->books()->paginate(10);
+
+        return view('categories.books', compact('category', 'books'));
     }
 
     /**

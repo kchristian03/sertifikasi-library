@@ -33,6 +33,7 @@
                     <td class="py-2 px-4 border-b">{{ $member->email }}</td>
                     <td class="py-2 px-4 border-b">{{ $member->address }}</td>
                     <td class="py-2 px-4 border-b">
+                        <a href="{{ route('members.show', $member->uuid) }}" class="text-blue-500 hover:underline mr-2">Detail</a>
                         <a href="{{ route('members.edit', $member->uuid) }}" class="text-yellow-500 hover:text-yellow-700 mr-2">Edit</a>
                         <form action="{{ route('members.destroy', $member->uuid) }}" method="POST" class="inline-block" onsubmit="return confirm('Are you sure you want to delete this member?');">
                             @csrf

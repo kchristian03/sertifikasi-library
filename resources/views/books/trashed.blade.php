@@ -12,7 +12,7 @@
         </div>
     @endif
 
-    @if($bukus->isEmpty())
+    @if($books->isEmpty())
         <div class="text-center text-gray-700">No books deleted.</div>
     @else
         <div class="overflow-x-auto">

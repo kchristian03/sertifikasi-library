@@ -12,7 +12,7 @@
         </div>
     @endif
 
-    @if($anggotas->isEmpty())
+    @if($members->isEmpty())
         <div class="text-center text-gray-700">No members were removed.</div>
     @else
         <div class="overflow-x-auto">

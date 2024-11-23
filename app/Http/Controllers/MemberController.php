@@ -45,9 +45,13 @@ class MemberController extends Controller
      */
     public function show(string $id)
     {
-        return view('members.show', [
-            'member' => Member::findOrFail($id),
-        ]);
+        // Mengambil anggota berdasarkan UUID dan eager load relasi 'books'
+        $member = Member::with('books')->where('uuid', $id)->firstOrFail();
+
+        // Mengambil buku yang dipinjam oleh anggota tersebut, dengan pagination
+        $books = $member->books()->paginate(10);
+
+        return view('members.books', compact('member', 'books'));
     }
 
     /**

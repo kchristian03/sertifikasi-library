@@ -3,7 +3,7 @@
 @section('content')
     <div class="flex justify-between items-center mb-6">
         <h1 class="text-2xl font-semibold">Deleted Category</h1>
-        <a href="{{ route('kategoris.index') }}" class="bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-600">Back</a>
+        <a href="{{ route('categories.index') }}" class="bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-600">Back</a>
     </div>
 
     @if(session('success'))
@@ -29,7 +29,7 @@
                 @foreach($categories as $category)
                     <tr class="text-center">
                         <td class="py-2 px-4 border-b">{{ $category->uuid }}</td>
-                        <td class="py-2 px-4 border-b">{{ $category->nama_kategori }}</td>
+                        <td class="py-2 px-4 border-b">{{ $category->category_name }}</td>
                         <td class="py-2 px-4 border-b">{{ $category->deleted_at->format('d M Y, H:i') }}</td>
                         <td class="py-2 px-4 border-b">
                             <form action="{{ route('categories.restore', $category->uuid) }}" method="POST" class="inline-block" onsubmit="return confirm('Do you want to restore this category?');">

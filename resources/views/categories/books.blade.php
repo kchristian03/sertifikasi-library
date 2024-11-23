@@ -13,7 +13,7 @@
             <table class="min-w-full bg-white shadow rounded">
                 <thead>
                 <tr>
-                    <th class="py-2 px-4 border-b">UUID</th>
+{{--                    <th class="py-2 px-4 border-b">UUID</th>--}}
                     <th class="py-2 px-4 border-b">Title</th>
                     <th class="py-2 px-4 border-b">Author</th>
                     <th class="py-2 px-4 border-b">Publish Year</th>
@@ -23,10 +23,10 @@
                 <tbody>
                 @foreach($books as $book)
                     <tr class="text-center">
-                        <td class="py-2 px-4 border-b">{{ $book->uuid }}</td>
+{{--                        <td class="py-2 px-4 border-b">{{ $book->uuid }}</td>--}}
                         <td class="py-2 px-4 border-b">{{ $book->title }}</td>
                         <td class="py-2 px-4 border-b">{{ $book->author }}</td>
-                        <td class="py-2 px-4 border-b">{{ $book->publish_yesr }}</td>
+                        <td class="py-2 px-4 border-b">{{ $book->publish_year }}</td>
                         <td class="py-2 px-4 border-b">
                             @if($book->member)
                                 {{ $book->member->name }}
